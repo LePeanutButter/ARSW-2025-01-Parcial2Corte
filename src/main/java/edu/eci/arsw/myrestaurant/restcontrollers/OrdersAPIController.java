@@ -20,6 +20,8 @@ import edu.eci.arsw.myrestaurant.model.Order;
 import edu.eci.arsw.myrestaurant.services.RestaurantOrderServices;
 
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +34,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/orders")
 public class OrdersAPIController {
+    @Autowired
     RestaurantOrderServices restaurantOrderServices;
 
-    @GetMapping("/")
+    @GetMapping()
     public ResponseEntity<ConcurrentHashMap<Order, Integer>> getOrdersWithPrice() {
         ConcurrentHashMap<Order, Integer> orders = restaurantOrderServices.getOrdersWithPrice();
         if (orders != null) return new ResponseEntity<>(orders, HttpStatus.OK);
