@@ -5,6 +5,10 @@
 
 ## Parcial segundo corte para el cálculo de cuentas de restaurantes.
 
+### Estudiante
+
+Hecho por: Santiago Botero Garcia
+
 ### Descripción
 
 En este proyecto se va a construír un API REST que permita calcular el valor total de una cuenta de restaurante, teniendo en cuenta las políticas y regímenes tributarios configurados para la misma.
@@ -57,3 +61,18 @@ Por defecto, el manejador de órdenes tiene dos órdenes registradas para las me
 
 Haga que a la aplicación se le inyecte el bean BasicBillCalculator y BillWithTaxesCalculator. Para esto utilice el principio de los Beans revisados en laboratorios anteriores y realice la inyección de dependencias entre éstos mediante las anotaciones @Autowired y @Service.
 * Nota:  Tiene que hacer que la clase "BillWithTaxesCalculator" utilice a "edu.eci.arsw.myrestaurant.beans.impl.colombia.StandardTaxesCalculator" para realizar su calculo, no es necesario que se inyecte.
+
+
+## Respuestas
+
+Se diseño el siguiente recurso para OrderAPIController, el cual consume BasicBillCalculator
+
+![img_1.png](img/img_1.png)
+
+Usando Postman se comprobo su funcionamiento
+
+![img_2.png](img/img_2.png)
+
+Se adiciono los Beans para BillTaxesCalculator usando los tags @Service y @Autowired en StandardTaxesCalculator
+
+![img.png](img/img.png)

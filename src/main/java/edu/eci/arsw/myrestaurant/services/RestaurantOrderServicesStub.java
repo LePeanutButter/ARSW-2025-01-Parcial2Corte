@@ -6,8 +6,10 @@ import edu.eci.arsw.myrestaurant.model.RestaurantProduct;
 import edu.eci.arsw.myrestaurant.beans.BillCalculator;
 import edu.eci.arsw.myrestaurant.model.ProductType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -77,8 +79,8 @@ public class RestaurantOrderServicesStub implements RestaurantOrderServices {
             Integer key = entry.getKey();
             Order order = entry.getValue();
             if (tableOrders.containsKey(key)) {
-                int newKey = calc.calculateBill(tableOrders.get(key), productsMap);
-                orders.put(order, newKey);
+                int value = calc.calculateBill(tableOrders.get(key), productsMap);
+                orders.put(order, value);
             }
         }
         return orders;
