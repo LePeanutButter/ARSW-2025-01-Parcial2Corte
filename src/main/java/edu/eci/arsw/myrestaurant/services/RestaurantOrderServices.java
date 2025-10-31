@@ -7,7 +7,10 @@ package edu.eci.arsw.myrestaurant.services;
 
 import edu.eci.arsw.myrestaurant.model.Order;
 import edu.eci.arsw.myrestaurant.model.RestaurantProduct;
+
+import java.util.Hashtable;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -28,5 +31,6 @@ public interface RestaurantOrderServices {
     Set<Integer> getTablesWithOrders();
 
     void releaseTable(int tableNumber) throws OrderServicesException;
-    
+
+    ConcurrentHashMap<Order, Integer> getOrdersWithPrice();
 }

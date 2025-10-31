@@ -17,24 +17,27 @@
 package edu.eci.arsw.myrestaurant.restcontrollers;
 
 import edu.eci.arsw.myrestaurant.model.Order;
-import edu.eci.arsw.myrestaurant.model.ProductType;
-import edu.eci.arsw.myrestaurant.model.RestaurantProduct;
-import edu.eci.arsw.myrestaurant.services.RestaurantOrderServicesStub;
-import java.util.Hashtable;
-import java.util.Map;
+import edu.eci.arsw.myrestaurant.services.RestaurantOrderServices;
+
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
  * @author hcadavid
  */
-public class OrdersAPIController {
 
-    
+@RestController
+@RequestMapping("/orders")
+public class OrdersAPIController {
+    RestaurantOrderServices restaurantOrderServices;
+
+    @GetMapping("/")
+    public ResponseEntity<ConcurrentHashMap<Order, Integer>> getOrdersWithPrice() {
+        ConcurrentHashMap<Order, Integer> orders = restaurantOrderServices.getOrdersWithPrice();
+        if (orders != null) return new ResponseEntity<>(orders, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+    }
 }

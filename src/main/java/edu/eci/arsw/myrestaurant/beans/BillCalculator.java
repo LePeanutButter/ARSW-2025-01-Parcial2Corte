@@ -6,6 +6,6 @@ import java.util.Map;
 
 public interface BillCalculator {
 	
-	public int calculateBill(Order o,Map<String,RestaurantProduct> productsMap) ;
+	int calculateBill(Order o,Map<String,RestaurantProduct> productsMap) ;
 	
 }

@@ -8,10 +8,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+@Service
 public class BillWithTaxesCalculator implements BillCalculator {
 
-
+    @Autowired
     TaxesCalculator taxescalc;
 
     @Override
@@ -20,7 +20,7 @@ public class BillWithTaxesCalculator implements BillCalculator {
         
         for (String p : o.getOrderedDishes()) {
             RestaurantProduct rp=productsMap.get(p);
-            total += (o.getDishOrderedAmount(p) * (rp.getPrice() * (1 + taxescalc.getProductTaxes(rp))));
+            total += (int) (o.getDishOrderedAmount(p) * (rp.getPrice() * (1 + taxescalc.getProductTaxes(rp))));
         }
         return total;
 

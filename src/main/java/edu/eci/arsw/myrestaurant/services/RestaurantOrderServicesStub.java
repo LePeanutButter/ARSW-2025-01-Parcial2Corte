@@ -5,14 +5,17 @@ import edu.eci.arsw.myrestaurant.model.Order;
 import edu.eci.arsw.myrestaurant.model.RestaurantProduct;
 import edu.eci.arsw.myrestaurant.beans.BillCalculator;
 import edu.eci.arsw.myrestaurant.model.ProductType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-
+@Service
 public class RestaurantOrderServicesStub implements RestaurantOrderServices {
 
-    
+    @Autowired
     BillCalculator calc = null;
 
     public RestaurantOrderServicesStub() {
@@ -24,11 +27,7 @@ public class RestaurantOrderServicesStub implements RestaurantOrderServices {
 
     @Override
     public Order getTableOrder(int tableNumber) {
-        if (!tableOrders.containsKey(tableNumber)) {
-            return null;
-        } else {
-            return tableOrders.get(tableNumber);
-        }
+        return tableOrders.getOrDefault(tableNumber, null);
     }
 
     @Override
@@ -69,6 +68,20 @@ public class RestaurantOrderServicesStub implements RestaurantOrderServices {
             tableOrders.remove(tableNumber);
         }
 
+    }
+
+    @Override
+    public ConcurrentHashMap<Order, Integer> getOrdersWithPrice() {
+        ConcurrentHashMap<Order, Integer> orders = new ConcurrentHashMap<>();
+        for (Map.Entry<Integer, Order> entry : tableOrders.entrySet()) {
+            Integer key = entry.getKey();
+            Order order = entry.getValue();
+            if (tableOrders.containsKey(key)) {
+                int newKey = calc.calculateBill(tableOrders.get(key), productsMap);
+                orders.put(order, newKey);
+            }
+        }
+        return orders;
     }
 
     @Override

@@ -4,6 +4,6 @@ import edu.eci.arsw.myrestaurant.model.RestaurantProduct;
 
 public interface TaxesCalculator {
 
-	public float getProductTaxes(RestaurantProduct p);
+	float getProductTaxes(RestaurantProduct p);
 	
 }

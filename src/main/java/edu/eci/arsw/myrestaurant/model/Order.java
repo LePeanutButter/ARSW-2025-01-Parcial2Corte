@@ -50,19 +50,13 @@ public class Order {
     }
 
     public int getDishOrderedAmount(String p) {
-        if (!orderAmountsMap.containsKey(p)) {
-            return 0;
-        } else {
-            return orderAmountsMap.get(p);
-        }
+        return orderAmountsMap.getOrDefault(p, 0);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Table " + tableNumber+"\n");
-        getOrderedDishes().forEach((p) -> {
-            sb.append(p).append(" x ").append(orderAmountsMap.get(p)).append("\n");
-        });
+        getOrderedDishes().forEach((p) -> sb.append(p).append(" x ").append(orderAmountsMap.get(p)).append("\n"));
         return sb.toString();
 
     }
